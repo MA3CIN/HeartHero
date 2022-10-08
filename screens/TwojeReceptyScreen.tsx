@@ -3,7 +3,8 @@ import { ScrollView, StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { ScreenWrapper } from '../components/ScreenWrapper';
-import { Text, View } from '../components/Themed';
+import { LatoText } from '../components/StyledText';
+import { View } from '../components/Themed';
 
 export default function TabTwoScreen() {
   const pageTitle = "TWOJE RECEPTY";
@@ -50,19 +51,19 @@ export default function TabTwoScreen() {
     <ScreenWrapper>
       {Object.keys(data).map((key, index) =>
         <View>
-          <Text style={styles.tag}>{key}</Text>
+          <LatoText style={styles.tag}>{key}</LatoText>
           {data[key].map((recipeType: any) => {
             const d = new Date(recipeType.timestamp);
             return <View style={styles.recipeBox}>
-              <Text style={styles.smallText}>{`Dnia: ${d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear()}`}</Text>
+              <LatoText style={styles.smallText}>{`Dnia: ${d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear()}`}</LatoText>
               <View style={styles.textContainer}>
-                <Text style={styles.bigText}>{`Wystawca: ${recipeType.wystawca}`}</Text>
-                <Text style={styles.bigText}>{`PWZ: ${recipeType.pwz}`}</Text>
+                <LatoText style={styles.bigText}>{`Wystawca: ${recipeType.wystawca}`}</LatoText>
+                <LatoText style={styles.bigText}>{`PWZ: ${recipeType.pwz}`}</LatoText>
               </View>
-              <Text style={[styles.smallText, { fontWeight: "bold" }]}>
+              <LatoText style={[styles.smallText, { fontWeight: "bold" }]}>
                 {`Kod recepty: ${recipeType.kod}`}
-              </Text>
-              <Text style={[styles.statusText, { color: index === 0 ? "#B40000" : "#3C8800" }]}>{`${index === 0 ? "NIE " : ""}ZREALIZOWANA`}</Text>
+              </LatoText>
+              <LatoText style={[styles.statusText, { color: index === 0 ? "#B40000" : "#3C8800" }]}>{`${index === 0 ? "NIE" : ""}ZREALIZOWANA`}</LatoText>
             </View>
           })}
         </View>)}

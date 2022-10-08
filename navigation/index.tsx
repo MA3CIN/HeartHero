@@ -14,6 +14,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import TwojDzienScreen from '../screens/TwojDzienScreen';
 import TabOneScreen from '../screens/TwojePomiaryScreen';
 import TabTwoScreen from '../screens/TwojeReceptyScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
@@ -58,15 +59,20 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="TwojDzienScreen"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="TabOne"
+        name="TwojePomiaryScreen"
         component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Twoje Pomiary',
+        options={({ navigation }: RootTabScreenProps<'TwojePomiaryScreen'>) => ({
+          title: 'TWOJE POMIARY',
+          headerBackgroundContainerStyle: { height: 110, width: "100%" },
+          headerTitleStyle: {
+            fontSize: 32,
+            marginTop: 10
+          },
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Pressable
@@ -86,19 +92,24 @@ function BottomTabNavigator() {
       />
 
       <BottomTab.Screen
-        name="TabThree"
-        component={TabTwoScreen}
+        name="TwojDzienScreen"
+        component={TwojDzienScreen}
         options={{
-          title: 'Twój Dzień',
+          title: 'TWÓJ DZIEŃ',
+          headerBackgroundContainerStyle: { height: 110, width: "100%" },
+          headerTitleStyle: {
+            fontSize: 32,
+            marginTop: 10
+          },
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="TwojeReceptyScreen"
         component={TabTwoScreen}
         options={{
           title: 'TWOJE RECEPTY',
-          headerBackgroundContainerStyle: { height: 110 },
+          headerBackgroundContainerStyle: { height: 110, width: "100%" },
           headerTitleStyle: {
             fontSize: 32,
             marginTop: 10

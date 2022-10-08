@@ -4,7 +4,7 @@ export const Pomiary = [{
         "source":   require('./pulse.png')
 }, {  
     "name":       "Ciśnienie",   
-    "value":      140/74,
+    "value":      '140/74',
     "source": require('./blood-pressure.png')  
 },{  
     "name":       "Waga",   

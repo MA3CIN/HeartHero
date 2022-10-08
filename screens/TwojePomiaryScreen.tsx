@@ -4,21 +4,21 @@ import { RootTabScreenProps } from '../types';
 import {colors} from '../colors'
 import {Pomiary} from '../mockedData/pomiary' 
 import React from 'react';
+import { LatoText } from '../components/StyledText';
 import { ScreenWrapper } from '../components/ScreenWrapper';
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function TabOneScreen({ navigation }: RootTabScreenProps<'TwojePomiaryScreen'>) {
   return (
     <ScreenWrapper>
-      <Text style={styles.title}>Twoje Pomiary</Text>
       {Pomiary.map((pomiar)=>
         <View key={pomiar.name} style={styles.pomiaryTile}>
-          {/* <View style={styles.tileTextContainer}> */}
-            <Text style={null}>{pomiar.name}</Text>
-            <Text style={null}>{pomiar.value}</Text>
-          {/* </View> */}
+          <View style={styles.tileTextContainer}>
+            <LatoText style={styles.textName}>{pomiar.name}</LatoText>
+            <LatoText style={styles.textValue}>{pomiar.value}</LatoText>
+          </View>
             <View style={styles.innerTile}>
               <Image source={pomiar.source}
-                      style={{ width: 40, height: 40 }}/>
+                      style={{ width: 70, height: 70 }}/>
             </View>
         </View>
       )}
@@ -27,32 +27,38 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    flexDirection: 'column',
-    backgroundColor: 'white'
+  textName: {
+    fontSize: 25,
+    color: colors.innerTextGrey,
+    marginBottom: 10
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    fontFamily: 'lato'
-  },
-  text: {
-    fontFamily: 'lato'
+  textValue: {
+    fontSize: 40
   },
   pomiaryTile: {
     backgroundColor: colors.grey,
     borderRadius: 15,
-    width: '100%'
+    width: '100%',
+    flex: 1,
+    flexDirection: 'row',
+    marginBottom: 23,
+    paddingVertical: 25,
+    paddingHorizontal: 20,
+    alignItems: 'center'
   },
   innerTile: {
-    backgroundColor: colors.innerGrey,
-    height: 20,
-    width: 20
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+    width: 5,
+    marginRight: 10
   },
   tileTextContainer: {
-    flex: 1,
-    flexDirection: 'column'
-  }
+    flex: 0.9,
+    flexDirection: 'column',
+    backgroundColor: 'transparent'  }
 });
+
+
+//34 48
