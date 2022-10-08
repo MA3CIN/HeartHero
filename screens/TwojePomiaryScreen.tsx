@@ -1,26 +1,32 @@
-import { ScrollView, StyleSheet, Image } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { StyleSheet, Image, Pressable } from 'react-native';
+import { View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
-import {colors} from '../colors'
-import {Pomiary} from '../mockedData/pomiary' 
+import { colors } from '../colors'
+import { Pomiary } from '../mockedData/pomiary'
 import React from 'react';
 import { LatoText } from '../components/StyledText';
 import { ScreenWrapper } from '../components/ScreenWrapper';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TwojePomiaryScreen'>) {
+  const OnPressFunction = (pomiar: any) => {
+    navigation.navigate('PoprzedniePomiaryScreen', { pomiar });
+  }
+
   return (
     <ScreenWrapper>
-      {Pomiary.map((pomiar)=>
-        <View key={pomiar.name} style={styles.pomiaryTile}>
-          <View style={styles.tileTextContainer}>
-            <LatoText style={styles.textName}>{pomiar.name}</LatoText>
-            <LatoText style={styles.textValue}>{pomiar.value}</LatoText>
-          </View>
+      {Pomiary.map((pomiar) =>
+        <Pressable onPress={() => OnPressFunction(pomiar)}>
+          <View key={pomiar.name} style={styles.pomiaryTile}>
+            <View style={styles.tileTextContainer}>
+              <LatoText style={styles.textName}>{pomiar.name}</LatoText>
+              <LatoText style={styles.textValue}>{pomiar.value}</LatoText>
+            </View>
             <View style={styles.innerTile}>
               <Image source={pomiar.source}
-                      style={{ width: 70, height: 70 }}/>
+                style={{ width: 70, height: 70 }} />
             </View>
-        </View>
+          </View>
+        </Pressable>
       )}
     </ScreenWrapper>
   );
@@ -57,8 +63,6 @@ const styles = StyleSheet.create({
   tileTextContainer: {
     flex: 0.9,
     flexDirection: 'column',
-    backgroundColor: 'transparent'  }
+    backgroundColor: 'transparent'
+  }
 });
-
-
-//34 48

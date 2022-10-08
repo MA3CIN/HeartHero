@@ -32,6 +32,7 @@ const linking: LinkingOptions<RootStackParamList> = {
           },
         },
       },
+      PoprzedniePomiaryScreen: 'PoprzedniePomiaryScreen',
       Modal: 'modal',
       NotFound: '*',
     },

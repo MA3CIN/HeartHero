@@ -8,12 +8,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, Pressable, View } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import PoprzedniePomiaryScreen from '../screens/PoprzedniePomiary';
 import TwojDzienScreen from '../screens/TwojDzienScreen';
 import TabOneScreen from '../screens/TwojePomiaryScreen';
 import TabTwoScreen from '../screens/TwojeReceptyScreen';
@@ -43,6 +44,8 @@ function RootNavigator() {
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="PoprzedniePomiaryScreen" component={PoprzedniePomiaryScreen} />
+
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -96,11 +99,7 @@ function BottomTabNavigator() {
         component={TwojDzienScreen}
         options={{
           title: 'TWÓJ DZIEŃ',
-          headerBackgroundContainerStyle: { height: 110, width: "100%" },
-          headerTitleStyle: {
-            fontSize: 32,
-            marginTop: 10
-          },
+          header: () => <View style={{height: 50}}/>,
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

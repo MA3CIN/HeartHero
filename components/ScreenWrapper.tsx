@@ -1,10 +1,12 @@
+import { useRoute } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { Text, TextProps } from './Themed';
 
-export function ScreenWrapper(props: TextProps) {
+export function ScreenWrapper(props: TextProps, withoutNav?: boolean) {
+    const route = useRoute();
     return <ScrollView contentContainerStyle={{
-        paddingTop: 35,
+        paddingTop: route.name == "TwojDzienScreen" ? 20 : 35,
         paddingBottom: 25,
     }} {...props} style={[props.style, styles.container]} />;
 }
