@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 20,
     lineHeight: 24,
-    color: "#00000030",
+    color: "#00000060",
     fontFamily: "lato",
     marginBottom: 18
   },
