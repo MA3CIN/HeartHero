@@ -3,6 +3,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { Dimensions, ScrollView, StyleSheet, Pressable, Image } from 'react-native';
 import { colors } from '../colors';
 
+
 import EditScreenInfo from '../components/EditScreenInfo';
 import { ScreenWrapper } from '../components/ScreenWrapper';
 import { LatoText } from '../components/StyledText';
@@ -63,13 +64,13 @@ export default function TwojDzienScreen({ navigation }: any) {
 
   const getTextDay = (day: number) => {
     switch (day) {
-      case 0: return "pn";
-      case 1: return "wt";
-      case 2: return "śr";
-      case 3: return "cz";
-      case 4: return "pt";
-      case 5: return "sb";
-      case 6: return "nd";
+      case 1: return "pn";
+      case 2: return "wt";
+      case 3: return "śr";
+      case 4: return "cz";
+      case 5: return "pt";
+      case 6: return "sb";
+      case 0: return "nd";
     }
   };
 
