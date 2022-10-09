@@ -40,11 +40,14 @@ export default function ReczneWpisanieScreen({ navigation }: any) {
 
 const styles = StyleSheet.create({
   mainWrapper: {
+    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'green',
+    height: 400
   },
   container: {
-    height: Dimensions.get('window').height / 2,
+    // height: Dimensions.get('window').height / 2,
     backgroundColor: 'pink',
     flex: 1,
     flexDirection: 'column',
