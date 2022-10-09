@@ -1,7 +1,6 @@
 import { StyleSheet, Image, Dimensions, TextInput, Pressable, Text } from 'react-native';
 import { useState } from 'react';
 import { View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
 import { colors } from '../colors'
 import React from 'react';
 import { LatoText } from '../components/StyledText';
@@ -71,7 +70,10 @@ const styles = StyleSheet.create({
     marginBottom: 23,
     paddingVertical: 25,
     paddingHorizontal: 20,
-    alignItems: 'center'
+    fontSize: 36,
+    textAlign: 'center',
+    borderColor: colors.black,
+    borderWidth: 4
   },
   confirmText: {
     color: colors.black,
