@@ -15,8 +15,8 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TwojePo
   return (
     <ScreenWrapper>
       {Pomiary.map((pomiar) =>
-        <Pressable onPress={() => OnPressFunction(pomiar)}>
-          <View key={pomiar.name} style={styles.pomiaryTile}>
+        <Pressable key={pomiar.name} onPress={() => OnPressFunction(pomiar)}>
+          <View style={styles.pomiaryTile}>
             <View style={styles.tileTextContainer}>
               <LatoText style={styles.textName}>{pomiar.name}</LatoText>
               <LatoText style={styles.textValue}>{pomiar.value}</LatoText>

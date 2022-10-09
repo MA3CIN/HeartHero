@@ -4,6 +4,7 @@
  *
  */
 import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -76,7 +77,7 @@ function BottomTabNavigator() {
             fontSize: 32,
             marginTop: 10
           },
-          tabBarIcon: ({ color }) => <TabBarIcon name="table" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="balance-scale" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -100,7 +101,7 @@ function BottomTabNavigator() {
         options={{
           title: 'TWÓJ DZIEŃ',
           header: () => <View style={{height: 50}}/>,
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="calendar-plus-o" color={color} />,
         }}
       />
       <BottomTab.Screen
@@ -113,17 +114,9 @@ function BottomTabNavigator() {
             fontSize: 32,
             marginTop: 10
           },
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons name="receipt-outline" style={{ marginBottom: -3 }} size={30} color={color} />,
         }}
       />
-      {/* <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      /> */}
     </BottomTab.Navigator>
   );
 }

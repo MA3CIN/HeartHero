@@ -94,7 +94,7 @@ export default function TwojDzienScreen() {
       <Text style={styles.title}>{`${getTextMonth(date.getMonth())} ${date.getFullYear()}`}</Text>
       <View style={styles.daysContainer}>
         {getDayData().map(dayData =>
-          <View style={[styles.singleDay, { opacity: dayData.day === `${date.getDate().toString().length === 1 ? "0" : ""}${date.getDate()}` ? 1 : 0.2 }]}>
+          <View key={`${dayData.day} ${dayData.weekDay}`} style={[styles.singleDay, { opacity: dayData.day === `${date.getDate().toString().length === 1 ? "0" : ""}${date.getDate()}` ? 1 : 0.2 }]}>
             <Text style={styles.bigText}>{dayData.day}</Text>
             <Text style={styles.smallText}>{dayData.weekDay}</Text>
           </View>
@@ -105,6 +105,7 @@ export default function TwojDzienScreen() {
         <Text style={styles.tag}>Leki</Text>
         {leki.map((lek, index) =>
           <Pressable
+            key={index}
             style={{ flexDirection: "row", alignItems: "center", marginBottom: 25, padding: 20, backgroundColor: colors.innerGrey, borderRadius: 15, opacity: lek.zaznaczone ? 0.4 : 1 }}
             onPress={() => {
               if (!lek.zaznaczone) {
@@ -130,6 +131,7 @@ export default function TwojDzienScreen() {
         <Text style={styles.tag}>Pomiary</Text>
         {pomiary.map((pomiar, index) =>
           <View
+            key={index}
             style={{ flexDirection: "row", alignItems: "center", marginBottom: 25, padding: 20, backgroundColor: colors.innerGrey, borderRadius: 15, opacity: pomiar.zaznaczone ? 0.4 : 1 }}
           >
             <Image source={pomiar.source}

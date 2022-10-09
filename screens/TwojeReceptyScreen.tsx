@@ -10,7 +10,7 @@ export default function TabTwoScreen() {
   const pageTitle = "TWOJE RECEPTY";
 
   const data: any = {
-    "Nie zrealizowane": [
+    "Niezrealizowane": [
       {
         timestamp: 1664889536000,
         wystawca: "Jan Kowalski",
@@ -18,7 +18,7 @@ export default function TabTwoScreen() {
         kod: "0749",
       },
       {
-        timestamp: 1664889536000,
+        timestamp: 1664889537000,
         wystawca: "Jan Kowalski",
         pwz: "2698040",
         kod: "0749",
@@ -54,7 +54,7 @@ export default function TabTwoScreen() {
           <LatoText style={styles.tag}>{key}</LatoText>
           {data[key].map((recipeType: any) => {
             const d = new Date(recipeType.timestamp);
-            return <View style={styles.recipeBox}>
+            return <View key={recipeType.timestamp} style={styles.recipeBox}>
               <LatoText style={styles.smallText}>{`Dnia: ${d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear()}`}</LatoText>
               <View style={styles.textContainer}>
                 <LatoText style={styles.bigText}>{`Wystawca: ${recipeType.wystawca}`}</LatoText>
