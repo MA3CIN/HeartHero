@@ -1,65 +1,64 @@
-import { StyleSheet, Image, Dimensions, TextInput, Pressable } from 'react-native';
+import { StyleSheet, Image, Dimensions, TextInput, Pressable, Text } from 'react-native';
 import { useState } from 'react';
 import { View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { colors } from '../colors'
 import React from 'react';
 import { LatoText } from '../components/StyledText';
-import { ScreenWrapper } from '../components/ScreenWrapper';
+import { ScreenViewWrapper } from '../components/ScreenWrapper';
 
 export default function ReczneWpisanieScreen({ navigation }: any) {
-    const onConfirmPressed = ()=>{
-        return null
-    }
-    const onChangeText = () => {
-        console.log(text)
-        setText
-        console.log(text)
-    }
     const [text, setText] = useState('')
 
+    const onConfirmPressed = ()=>{
+        if ( text.length !== 0){
+            navigation.pop(2)
+        } 
+    }
+
+
   return (
-    <ScreenWrapper>
+    <ScreenViewWrapper style={{
+        alignItems: 'center',
+        justifyContent: 'center',}}>
         <View style={styles.mainWrapper}>
           <View style={styles.container}>
           <LatoText style={styles.textName}>Wprowadź pomiar tętna</LatoText>
             <View style={styles.inputWrapper}>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={onChangeText}
+                    onChangeText={setText}
                     value={text} />            
             </View>
-            <Pressable onPress={() => onConfirmPressed()}>
-                <LatoText style={null}>Potwierdzam</LatoText>
+            <Pressable onPress={() => onConfirmPressed()} style={styles.pressableWrapper}>
+                <LatoText style={styles.confirmText}>Potwierdzam</LatoText>
             </Pressable>
           </View>
         </View>
-    </ScreenWrapper>
+    </ScreenViewWrapper>
+
+
   );
 }
 
 const styles = StyleSheet.create({
   mainWrapper: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'green',
-    height: 400
   },
   container: {
-    // height: Dimensions.get('window').height / 2,
-    backgroundColor: 'pink',
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textName: {
-    fontSize: 25,
-    color: colors.innerTextGrey,
-    marginBottom: 10
+    fontSize: 40,
+    color: colors.black,
+    marginBottom: 45,
+    textAlign: 'center'
   },
   inputWrapper: {
-
+  height: 120,
+  width: 285,
   },
   textValue: {
     fontSize: 40
@@ -67,7 +66,6 @@ const styles = StyleSheet.create({
   textInput: {
     backgroundColor: colors.grey,
     borderRadius: 15,
-    width: '100%',
     flex: 1,
     flexDirection: 'row',
     marginBottom: 23,
@@ -75,4 +73,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignItems: 'center'
   },
+  confirmText: {
+    color: colors.black,
+    fontWeight: '700',
+    fontSize: 24,
+    textAlign: 'center'
+  },
+  pressableWrapper: {
+    height: 80,
+    justifyContent: 'center'    
+},
 });
