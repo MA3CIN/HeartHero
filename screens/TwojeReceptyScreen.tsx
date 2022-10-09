@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { ScreenWrapper } from '../components/ScreenWrapper';
@@ -63,7 +63,7 @@ export default function TabTwoScreen() {
               <LatoText style={[styles.smallText, { fontWeight: "bold" }]}>
                 {`Kod recepty: ${recipeType.kod}`}
               </LatoText>
-              <LatoText style={[styles.statusText, { color: index === 0 ? "#B40000" : "#3C8800" }]}>{`${index === 0 ? "NIE" : ""}ZREALIZOWANA`}</LatoText>
+              <Text style={[styles.statusText, { color: index === 0 ? "#B40000" : "#3C8800" }]}>{`${index === 0 ? "NIE" : ""}ZREALIZOWANA`}</Text>
             </View>
           })}
         </View>)}
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   },
   statusText: {
     textAlign: "right",
+    fontFamily: "lato-bold",
     fontSize: 24,
     lineHeight: 29,
   }

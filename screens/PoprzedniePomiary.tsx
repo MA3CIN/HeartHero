@@ -14,12 +14,12 @@ export default function PoprzedniePomiaryScreen({ navigation, route }: RootTabSc
         {route.params?.pomiar.name + "STATYSTYKI:"}
     </Text>
       {route.params?.pomiar.data.map((wynik: any)=>
-        <View key={wynik.value} style={styles.pomiaryTile}>
+        <View key={wynik.value + wynik.date} style={styles.pomiaryTile}>
             <View style={styles.innerTile}>
-              <Text>{wynik.value}</Text>
+              <LatoText style={styles.textName}>{wynik.value}</LatoText>
             </View>
             <View style={styles.tileTextContainer}>
-            <LatoText style={styles.textName}>{wynik.time}</LatoText>
+            <LatoText style={styles.textValue}>{wynik.time}</LatoText>
             <LatoText style={styles.textValue}>{wynik.date}</LatoText>
           </View>
         </View>
@@ -31,12 +31,12 @@ export default function PoprzedniePomiaryScreen({ navigation, route }: RootTabSc
 
 const styles = StyleSheet.create({
   textName: {
-    fontSize: 25,
+    fontSize: 48,
     color: colors.innerTextGrey,
     marginBottom: 10
   },
   textValue: {
-    fontSize: 40
+    fontSize: 20
   },
   pomiaryTile: {
     backgroundColor: colors.grey,
@@ -54,14 +54,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 50,
-    width: 5,
-    marginRight: 10
-  },
+    flex: 1  },
   tileTextContainer: {
-    flex: 0.9,
+    flex: 0.5,
     flexDirection: 'column',
     backgroundColor: 'transparent'  }
 });
-
-
-//34 48

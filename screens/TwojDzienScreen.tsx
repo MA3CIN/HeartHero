@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Dimensions, ScrollView, StyleSheet } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet, Pressable, Image } from 'react-native';
 import { colors } from '../colors';
 
 import EditScreenInfo from '../components/EditScreenInfo';
@@ -19,6 +19,27 @@ export default function TwojDzienScreen() {
     nazwa: "Corsanum",
     dawka: "1 kapsuła po jedzeniu",
     czas: "10:00",
+    zaznaczone: false
+  }])
+
+  const [pomiary, setPomiary] = useState([{
+    nazwa: "Tętno",
+    source: require('../mockedData/pulse.png'),
+    zaznaczone: true
+  },
+  {
+    nazwa: "Ciśnienie",
+    source: require('../mockedData/blood-pressure.png'),
+    zaznaczone: false
+  },
+  {
+    nazwa: "Temperatura",
+    source: require('../mockedData/thermometer.png'),
+    zaznaczone: false
+  },
+  {
+    nazwa: "Waga",
+    source: require('../mockedData/weight-scale.png'),
     zaznaczone: false
   }])
 
@@ -82,22 +103,40 @@ export default function TwojDzienScreen() {
 
       <ScreenWrapper>
         <Text style={styles.tag}>Leki</Text>
-        {leki.map(lek =>
-          <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 25, padding: 20, backgroundColor:  colors.innerGrey, borderRadius: 15 }}>
+        {leki.map((lek, index) =>
+          <Pressable
+            style={{ flexDirection: "row", alignItems: "center", marginBottom: 25, padding: 20, backgroundColor: colors.innerGrey, borderRadius: 15, opacity: lek.zaznaczone ? 0.4 : 1 }}
+            onPress={() => {
+              if (!lek.zaznaczone) {
+                const nowyLek = { ...lek, zaznaczone: !lek.zaznaczone }
+                const newLeki = leki.map((tempLek, idx) => idx === index ? nowyLek : tempLek);
+                setLeki(newLeki);
+              }
+            }}
+          >
             <FontAwesome5
               name={lek.zaznaczone ? "check-square" : "square"}
               size={25}
               color={"black"}
-              style={{ marginRight: 15 }}
+              style={{ marginRight: 15, backgroudColor: "white" }}
             />
             <View>
-              <Text style={{ fontSize: 24 }}>{lek.nazwa}</Text>
+              <Text style={{ fontSize: 24, textDecorationLine: lek.zaznaczone ? "line-through" : "none" }}>{lek.nazwa}</Text>
               <Text style={{ fontSize: 14 }}>{lek.dawka}</Text>
             </View>
             <Text style={{ marginRight: 0, marginLeft: "auto", fontSize: 24 }}>{lek.czas}</Text>
-          </View>
+          </Pressable>
         )}
         <Text style={styles.tag}>Pomiary</Text>
+        {pomiary.map((pomiar, index) =>
+          <View
+            style={{ flexDirection: "row", alignItems: "center", marginBottom: 25, padding: 20, backgroundColor: colors.innerGrey, borderRadius: 15, opacity: pomiar.zaznaczone ? 0.4 : 1 }}
+          >
+            <Image source={pomiar.source}
+              style={{ width: 30, height: 30, marginRight: 15 }} />
+            <Text style={{ fontSize: 24, textDecorationLine: pomiar.zaznaczone ? "line-through" : "none" }}>{pomiar.nazwa}</Text>
+          </View>
+        )}
       </ScreenWrapper>
     </ScrollView>
   );
