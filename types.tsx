@@ -28,8 +28,8 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 >;
 
 export type RootTabParamList = {
-  TwojePomiaryScreen: undefined;
-  TwojDzienScreen: undefined;
+  TwojePomiaryScreen: any;
+  TwojDzienScreen: any;
   TwojeReceptyScreen: undefined;
   PoprzedniePomiaryScreen: any;
   CzujnikPomiarScreen: any;

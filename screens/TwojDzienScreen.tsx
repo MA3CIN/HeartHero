@@ -8,17 +8,18 @@ import EditScreenInfo from '../components/EditScreenInfo';
 import { ScreenWrapper } from '../components/ScreenWrapper';
 import { LatoText } from '../components/StyledText';
 import { Text, View } from '../components/Themed';
+import { PomiaryContext } from '../context';
 
 export default function TwojDzienScreen({ navigation }: any) {
   const [leki, setLeki] = useState([{
     nazwa: "Kandesatran",
-    dawka: "1 kapsuła podczas jedzenia",
+    dawka: "1 tabletka podczas jedzenia",
     czas: "9:00",
     zaznaczone: false
   },
   {
     nazwa: "Corsanum",
-    dawka: "1 kapsuła po jedzeniu",
+    dawka: "1 tabletka po jedzeniu",
     czas: "10:00",
     zaznaczone: false
   }])
@@ -88,62 +89,68 @@ export default function TwojDzienScreen({ navigation }: any) {
   }
 
   return (
-    <ScrollView contentContainerStyle={{
-      paddingTop: 20,
-      paddingBottom: 25,
-    }} style={{ backgroundColor: 'white' }}>
-      <Text style={styles.title}>{`${getTextMonth(date.getMonth())} ${date.getFullYear()}`}</Text>
-      <View style={styles.daysContainer}>
-        {getDayData().map(dayData =>
-          <View key={`${dayData.day} ${dayData.weekDay}`} style={[styles.singleDay, { opacity: dayData.day === `${date.getDate().toString().length === 1 ? "0" : ""}${date.getDate()}` ? 1 : 0.2 }]}>
-            <Text style={styles.bigText}>{dayData.day}</Text>
-            <Text style={styles.smallText}>{dayData.weekDay}</Text>
+    <PomiaryContext.Consumer>
+      {data =>
+        <ScrollView contentContainerStyle={{
+          paddingTop: 20,
+          paddingBottom: 25,
+        }} style={{ backgroundColor: 'white' }}>
+          <Text style={styles.title}>{`${getTextMonth(date.getMonth())} ${date.getFullYear()}`}</Text>
+          <View style={styles.daysContainer}>
+            {getDayData().map(dayData =>
+              <View key={`${dayData.day} ${dayData.weekDay}`} style={[styles.singleDay, { opacity: dayData.day === `${date.getDate().toString().length === 1 ? "0" : ""}${date.getDate()}` ? 1 : 0.2 }]}>
+                <Text style={styles.bigText}>{dayData.day}</Text>
+                <Text style={styles.smallText}>{dayData.weekDay}</Text>
+              </View>
+            )}
           </View>
-        )}
-      </View>
 
-      <ScreenWrapper>
-        <Text style={styles.tag}>Leki</Text>
-        {leki.map((lek, index) =>
-          <Pressable
-            key={index}
-            style={{ flexDirection: "row", alignItems: "center", marginBottom: 25, padding: 20, backgroundColor: colors.innerGrey, borderRadius: 15, opacity: lek.zaznaczone ? 0.4 : 1 }}
-            onPress={() => {
-              if (!lek.zaznaczone) {
-                const nowyLek = { ...lek, zaznaczone: !lek.zaznaczone }
-                const newLeki = leki.map((tempLek, idx) => idx === index ? nowyLek : tempLek);
-                setLeki(newLeki);
-              }
-            }}
-          >
-            <FontAwesome5
-              name={lek.zaznaczone ? "check-square" : "square"}
-              size={25}
-              color={"black"}
-              style={{ marginRight: 15, backgroudColor: "white" }}
-            />
-            <View>
-              <Text style={{ fontSize: 24, textDecorationLine: lek.zaznaczone ? "line-through" : "none" }}>{lek.nazwa}</Text>
-              <Text style={{ fontSize: 14 }}>{lek.dawka}</Text>
-            </View>
-            <Text style={{ marginRight: 0, marginLeft: "auto", fontSize: 24 }}>{lek.czas}</Text>
-          </Pressable>
-        )}
-        <Text style={styles.tag}>Pomiary</Text>
-        {pomiary.map((pomiar, index) =>
-          <Pressable
-            onPress={() =>
-              navigation.navigate('CzujnikPomiarScreen')}
-            key={index}
-            style={{ flexDirection: "row", alignItems: "center", marginBottom: 25, padding: 20, backgroundColor: colors.innerGrey, borderRadius: 15, opacity: pomiar.zaznaczone ? 0.4 : 1 }}
-          >
-            <Image source={pomiar.source}
-              style={{ width: 30, height: 30, marginRight: 15 }} />
-            <Text style={{ fontSize: 24, textDecorationLine: pomiar.zaznaczone ? "line-through" : "none" }}>{pomiar.nazwa}</Text>
-          </Pressable>
-        )}
-      </ScreenWrapper>
-    </ScrollView>
+          <ScreenWrapper>
+            <Text style={styles.tag}>Leki</Text>
+            {leki.map((lek, index) =>
+              <Pressable
+                key={index}
+                style={{ flexDirection: "row", alignItems: "center", marginBottom: 25, padding: 20, backgroundColor: colors.innerGrey, borderRadius: 15, opacity: lek.zaznaczone ? 0.4 : 1 }}
+                onPress={() => {
+                  if (!lek.zaznaczone) {
+                    const nowyLek = { ...lek, zaznaczone: !lek.zaznaczone }
+                    const newLeki = leki.map((tempLek, idx) => idx === index ? nowyLek : tempLek);
+                    setLeki(newLeki);
+                  }
+                }}
+              >
+                <FontAwesome5
+                  name={lek.zaznaczone ? "check-square" : "square"}
+                  size={25}
+                  color={"black"}
+                  style={{ marginRight: 15, backgroudColor: "white" }}
+                />
+                <View>
+                  <Text style={{ fontSize: 24, textDecorationLine: lek.zaznaczone ? "line-through" : "none" }}>{lek.nazwa}</Text>
+                  <Text style={{ fontSize: 14 }}>{lek.dawka}</Text>
+                </View>
+                <Text style={{ marginRight: 0, marginLeft: "auto", fontSize: 24 }}>{lek.czas}</Text>
+              </Pressable>
+            )}
+            <Text style={styles.tag}>Pomiary</Text>
+            {pomiary.map((pomiar, index) =>
+              <Pressable
+                onPress={() => {
+                  if (!(pomiar.zaznaczone || (pomiar.nazwa === "Waga" && data?.state.pomiary[2].data[0].date === "09/10/2022")))
+                    navigation.navigate('CzujnikPomiarScreen')
+                }}
+                key={index}
+                style={{ flexDirection: "row", alignItems: "center", marginBottom: 25, padding: 20, backgroundColor: colors.innerGrey, borderRadius: 15, opacity: pomiar.zaznaczone || (pomiar.nazwa === "Waga" && data?.state.pomiary[2].data[0].date === "09/10/2022") ? 0.4 : 1 }}
+              >
+                <Image source={pomiar.source}
+                  style={{ width: 30, height: 30, marginRight: 15 }} />
+                <Text style={{ fontSize: 24, textDecorationLine: pomiar.zaznaczone || (pomiar.nazwa === "Waga" && data?.state.pomiary[2].data[0].date === "09/10/2022") ? "line-through" : "none" }}>{pomiar.nazwa}</Text>
+              </Pressable>
+            )}
+          </ScreenWrapper>
+        </ScrollView>
+      }
+    </PomiaryContext.Consumer>
   );
 }
 
@@ -170,7 +177,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: colors.innerGrey,
+    backgroundColor: colors.grey,
     padding: 20,
     marginBottom: 25
   },

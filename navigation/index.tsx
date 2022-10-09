@@ -25,12 +25,12 @@ import TabTwoScreen from '../screens/TwojeReceptyScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
-export default function Navigation({ colorScheme, pomiary, addPomiar }: { colorScheme: ColorSchemeName, pomiary: any, addPomiar: Function }) {
+export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <RootNavigator {...{pomiary, addPomiar}} />
+      <RootNavigator />
     </NavigationContainer>
   );
 }
@@ -48,9 +48,9 @@ function RootNavigator({pomiary, addPomiar}: any) {
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
-        <Stack.Screen name="PoprzedniePomiaryScreen" initialParams={{pomiary, addPomiar}} component={PoprzedniePomiaryScreen} options={{ title: 'POPRZEDNIE POMIARY' }} />
+        <Stack.Screen name="PoprzedniePomiaryScreen" component={PoprzedniePomiaryScreen} options={{ title: 'POPRZEDNIE POMIARY' }} />
         <Stack.Screen name="CzujnikPomiarScreen" component={CzujnikPomiarScreen}  options={{ headerShown: false }}/>
-        <Stack.Screen name="RecznyPomiar" component={ReczneWpisanieScreen} initialParams={{pomiary, addPomiar}} options={{ headerShown: false }} />
+        <Stack.Screen name="RecznyPomiar" component={ReczneWpisanieScreen} options={{ headerShown: false }} />
       </Stack.Group>
     </Stack.Navigator>
   );

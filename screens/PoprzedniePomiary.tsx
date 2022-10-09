@@ -2,12 +2,11 @@ import { ScrollView, StyleSheet, Image, Pressable } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { colors } from '../colors'
-import React from 'react';
+import React, { useEffect } from 'react';
 import { LatoText } from '../components/StyledText';
 import { ScreenWrapper } from '../components/ScreenWrapper';
 
 export default function PoprzedniePomiaryScreen({ navigation, route }: RootTabScreenProps<'PoprzedniePomiaryScreen'>) {
-
   return (
     <ScreenWrapper>
       {route.params?.pomiar.data.map((wynik: any) =>
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
 
   },
   tileTextContainer: {
-    flex: 0.9,
+    flex: 0.75,
     flexDirection: 'column',
     backgroundColor: 'transparent'
   }

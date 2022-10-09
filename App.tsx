@@ -6,27 +6,21 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import { Pomiary } from "./mockedData/pomiary";
+import { PomiaryProvider } from './context';
 
 export default function App() {
-  const [pomiary, setPomiary] = useState(Pomiary);
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-
-  const addPomiar = (newPomiar: any, name: string) => {
-    const newPomiary = JSON.parse(JSON.stringify(pomiary));
-    const index = pomiary.findIndex(pom => pom.name === name);
-    newPomiary[index].data.unshift(newPomiar);
-    newPomiary[index].value = newPomiar;
-    setPomiary(pomiary);
-  }
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} addPomiar={addPomiar} pomiary={pomiary} />
-        <StatusBar />
+        <PomiaryProvider>
+          <Navigation colorScheme={colorScheme} />
+          <StatusBar />
+        </PomiaryProvider>
       </SafeAreaProvider>
     );
   }

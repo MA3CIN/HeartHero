@@ -1,42 +1,45 @@
 import { StyleSheet, Image, Dimensions, TextInput, Pressable, Text } from 'react-native';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { View } from '../components/Themed';
 import { colors } from '../colors'
 import React from 'react';
 import { LatoText } from '../components/StyledText';
 import { ScreenViewWrapper } from '../components/ScreenWrapper';
+import { PomiaryContext, usePomiar } from '../context';
 
 export default function ReczneWpisanieScreen({ navigation }: any) {
-    const [text, setText] = useState('')
+  const now = new Date();
+  const [text, setText] = useState('')
+  const { dispatch } = usePomiar();
 
-    const onConfirmPressed = ()=>{
-        if ( text.length !== 0){
-            navigation.pop(2)
-        } 
+  const onConfirmPressed = () => {
+    if (text.length !== 0) {
+      dispatch({ type: 'add', name: "Waga", pomiar: { "value": parseFloat(text), "date": "09/10/2022", "time": now.getHours() + ':' + (now.getMinutes().toString().length === 1 ? "0" : "") + now.getMinutes() } })
+      navigation.pop(2);
     }
+  }
 
 
   return (
     <ScreenViewWrapper style={{
-        alignItems: 'center',
-        justifyContent: 'center',}}>
-        <View style={styles.mainWrapper}>
-          <View style={styles.container}>
-          <LatoText style={styles.textName}>Wprowadź pomiar tętna</LatoText>
-            <View style={styles.inputWrapper}>
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={setText}
-                    value={text} />            
-            </View>
-            <Pressable onPress={() => onConfirmPressed()} style={styles.pressableWrapper}>
-                <LatoText style={styles.confirmText}>Potwierdzam</LatoText>
-            </Pressable>
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}>
+      <View style={styles.mainWrapper}>
+        <View style={styles.container}>
+          <LatoText style={styles.textName}>Wprowadź pomiar wagi</LatoText>
+          <View style={styles.inputWrapper}>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={setText}
+              value={text} />
           </View>
+          <Pressable onPress={() => onConfirmPressed()} style={styles.pressableWrapper}>
+            <LatoText style={styles.confirmText}>Potwierdzam</LatoText>
+          </Pressable>
         </View>
+      </View>
     </ScreenViewWrapper>
-
-
   );
 }
 
@@ -56,8 +59,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   inputWrapper: {
-  height: 120,
-  width: 285,
+    height: 120,
+    width: 285,
   },
   textValue: {
     fontSize: 40
@@ -83,6 +86,6 @@ const styles = StyleSheet.create({
   },
   pressableWrapper: {
     height: 80,
-    justifyContent: 'center'    
-},
+    justifyContent: 'center'
+  },
 });

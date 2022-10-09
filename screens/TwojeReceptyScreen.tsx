@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
+import { colors } from '../colors';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { ScreenWrapper } from '../components/ScreenWrapper';
@@ -50,11 +51,11 @@ export default function TabTwoScreen() {
   return (
     <ScreenWrapper>
       {Object.keys(data).map((key, index) =>
-        <View>
+        <View key={index}>
           <LatoText style={styles.tag}>{key}</LatoText>
           {data[key].map((recipeType: any) => {
             const d = new Date(recipeType.timestamp);
-            return <View key={recipeType.timestamp} style={styles.recipeBox}>
+            return <View key={recipeType.timestamp} style={[styles.recipeBox, { backgroundColor: index === 0 ? "#B4000020" : "#3C880020" }]}>
               <LatoText style={styles.smallText}>{`Dnia: ${d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear()}`}</LatoText>
               <View style={styles.textContainer}>
                 <LatoText style={styles.bigText}>{`Wystawca: ${recipeType.wystawca}`}</LatoText>
@@ -84,7 +85,6 @@ const styles = StyleSheet.create({
     marginBottom: 18
   },
   recipeBox: {
-    backgroundColor: "#E6E6E6",
     borderRadius: 15,
     padding: 24,
     marginBottom: 28

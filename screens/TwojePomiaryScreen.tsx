@@ -2,10 +2,10 @@ import { StyleSheet, Image, Pressable } from 'react-native';
 import { View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { colors } from '../colors'
-import { Pomiary } from '../mockedData/pomiary'
 import React from 'react';
 import { LatoText } from '../components/StyledText';
 import { ScreenWrapper } from '../components/ScreenWrapper';
+import { PomiaryContext } from '../context';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TwojePomiaryScreen'>) {
   const OnPressFunction = (pomiar: any) => {
@@ -14,20 +14,25 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TwojePo
 
   return (
     <ScreenWrapper>
-      {Pomiary.map((pomiar) =>
-        <Pressable key={pomiar.name} onPress={() => OnPressFunction(pomiar)}>
-          <View style={styles.pomiaryTile}>
-            <View style={styles.tileTextContainer}>
-              <LatoText style={styles.textName}>{pomiar.name}</LatoText>
-              <LatoText style={styles.textValue}>{pomiar.value}</LatoText>
-            </View>
-            <View style={styles.innerTile}>
-              <Image source={pomiar.source}
-                style={{ width: 70, height: 70 }} />
-            </View>
-          </View>
-        </Pressable>
-      )}
+      <PomiaryContext.Consumer>
+        {data => {
+          return data?.state.pomiary.map((pomiar: any) =>
+            <Pressable key={pomiar.name} onPress={() => OnPressFunction(pomiar)}>
+              <View style={styles.pomiaryTile}>
+                <View style={styles.tileTextContainer}>
+                  <LatoText style={styles.textName}>{pomiar.name}</LatoText>
+                  <LatoText style={styles.textValue}>{pomiar.value}</LatoText>
+                </View>
+                <View style={styles.innerTile}>
+                  <Image source={pomiar.source}
+                    style={{ width: 70, height: 70 }} />
+                </View>
+              </View>
+            </Pressable>
+          )
+        }
+        }
+      </PomiaryContext.Consumer>
     </ScreenWrapper>
   );
 }
@@ -66,3 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   }
 });
+
+function usePomiary(): [any, any] {
+  throw new Error('Function not implemented.');
+}
