@@ -34,6 +34,7 @@ const linking: LinkingOptions<RootStackParamList> = {
       },
       CzujnikPomiarScreen: "CzujnikPomiarScreen",
       PoprzedniePomiaryScreen: 'PoprzedniePomiaryScreen',
+      RecznyPomiar: "RecznyPomiar",
       Modal: 'modal',
       NotFound: '*',
     },

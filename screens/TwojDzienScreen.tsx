@@ -8,7 +8,7 @@ import { ScreenWrapper } from '../components/ScreenWrapper';
 import { LatoText } from '../components/StyledText';
 import { Text, View } from '../components/Themed';
 
-export default function TwojDzienScreen() {
+export default function TwojDzienScreen({ navigation }: any) {
   const [leki, setLeki] = useState([{
     nazwa: "Kandesatran",
     dawka: "1 kapsuła podczas jedzenia",
@@ -30,12 +30,12 @@ export default function TwojDzienScreen() {
   {
     nazwa: "Ciśnienie",
     source: require('../mockedData/blood-pressure.png'),
-    zaznaczone: false
+    zaznaczone: true
   },
   {
     nazwa: "Temperatura",
     source: require('../mockedData/thermometer.png'),
-    zaznaczone: false
+    zaznaczone: true
   },
   {
     nazwa: "Waga",
@@ -130,14 +130,16 @@ export default function TwojDzienScreen() {
         )}
         <Text style={styles.tag}>Pomiary</Text>
         {pomiary.map((pomiar, index) =>
-          <View
+          <Pressable
+            onPress={() =>
+              navigation.navigate('CzujnikPomiarScreen')}
             key={index}
             style={{ flexDirection: "row", alignItems: "center", marginBottom: 25, padding: 20, backgroundColor: colors.innerGrey, borderRadius: 15, opacity: pomiar.zaznaczone ? 0.4 : 1 }}
           >
             <Image source={pomiar.source}
               style={{ width: 30, height: 30, marginRight: 15 }} />
             <Text style={{ fontSize: 24, textDecorationLine: pomiar.zaznaczone ? "line-through" : "none" }}>{pomiar.nazwa}</Text>
-          </View>
+          </Pressable>
         )}
       </ScreenWrapper>
     </ScrollView>

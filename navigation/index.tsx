@@ -20,28 +20,17 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import PoprzedniePomiaryScreen from '../screens/PoprzedniePomiary';
 import TwojDzienScreen from '../screens/TwojDzienScreen';
 import TabOneScreen from '../screens/TwojePomiaryScreen';
+import ReczneWpisanieScreen from '../screens/ReczneWpisanieScreen';
 import TabTwoScreen from '../screens/TwojeReceptyScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-  
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => setIsPopupVisible(!isPopupVisible), isPopupVisible ? 15000 : 30000)
-  }, [isPopupVisible])
-
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <RootNavigator />
-      
-      {isPopupVisible &&
-          <Pressable onPress={() => (null)} style={{ position: 'absolute', padding: 20, left: 10, right: 10, top: 60, borderRadius: 15, backgroundColor: "grey", zIndex: 5 }}>
-            <Text>Popup</Text>
-          </Pressable>}
     </NavigationContainer>
   );
 }
@@ -59,11 +48,9 @@ function RootNavigator() {
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
-        <Stack.Screen name="PoprzedniePomiaryScreen" component={PoprzedniePomiaryScreen} options={{ title: 'Poprzednie Pomiary' }} />
-        <Stack.Screen name="CzujnikPomiarScreen" component={CzujnikPomiarScreen} />
-        <Stack.Screen name="RecznyPomiar" component={CzujnikPomiarScreen} />
-
-
+        <Stack.Screen name="PoprzedniePomiaryScreen" component={PoprzedniePomiaryScreen} options={{ title: 'POPRZEDNIE POMIARY' }} />
+        <Stack.Screen name="CzujnikPomiarScreen" component={CzujnikPomiarScreen}  options={{ headerShown: false }}/>
+        <Stack.Screen name="RecznyPomiar" component={ReczneWpisanieScreen} options={{ headerShown: false }} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -117,7 +104,7 @@ function BottomTabNavigator() {
         component={TwojDzienScreen}
         options={{
           title: 'TWÓJ DZIEŃ',
-          header: () => <View style={{height: 50}}/>,
+          header: () => <View style={{ height: 50 }} />,
           tabBarIcon: ({ color }) => <TabBarIcon name="calendar-plus-o" color={color} />,
         }}
       />
