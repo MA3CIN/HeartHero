@@ -10,17 +10,14 @@ export default function PoprzedniePomiaryScreen({ navigation, route }: RootTabSc
   
     return (
     <ScreenWrapper>
-    <Text>
-        {route.params?.pomiar.name + "STATYSTYKI:"}
-    </Text>
       {route.params?.pomiar.data.map((wynik: any)=>
         <View key={wynik.value + wynik.date} style={styles.pomiaryTile}>
-            <View style={styles.innerTile}>
-              <LatoText style={styles.textName}>{wynik.value}</LatoText>
+            <View style={styles.valueContainer}>
+              <LatoText style={styles.measureValue}>{wynik.value}</LatoText>
             </View>
             <View style={styles.tileTextContainer}>
-            <LatoText style={styles.textValue}>{wynik.time}</LatoText>
-            <LatoText style={styles.textValue}>{wynik.date}</LatoText>
+            <LatoText style={styles.dateOfMeasure}>{wynik.date}</LatoText>
+            <LatoText style={styles.dateOfMeasure}>{wynik.time}</LatoText>
           </View>
         </View>
       )
@@ -30,13 +27,13 @@ export default function PoprzedniePomiaryScreen({ navigation, route }: RootTabSc
 }
 
 const styles = StyleSheet.create({
-  textName: {
+  measureValue: {
     fontSize: 48,
-    color: colors.innerTextGrey,
-    marginBottom: 10
-  },
-  textValue: {
-    fontSize: 20
+    color: colors.black  },
+  dateOfMeasure: {
+    fontSize: 20,
+    fontWeight: "700",
+    textAlign: "right"
   },
   pomiaryTile: {
     backgroundColor: colors.grey,
@@ -45,18 +42,19 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     marginBottom: 23,
-    paddingVertical: 25,
+    paddingVertical: 30,
     paddingHorizontal: 20,
     alignItems: 'center'
   },
-  innerTile: {
+  valueContainer: {
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 50,
-    flex: 1  },
+    flex: 1,
+
+},
   tileTextContainer: {
-    flex: 0.5,
+    flex: 0.9,
     flexDirection: 'column',
     backgroundColor: 'transparent'  }
 });
