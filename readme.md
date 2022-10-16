@@ -1,7 +1,7 @@
-#HeartHero
+# HeartHero
 This is an App that I have co-created with @sofiia2002 in 9 hours during the E-health hackathon in Warsaw!
 
-#How to run it
+## How to run it
 Install Expo, depdendencies and then run:
 `expo start --tunnel`
 to start the app.
