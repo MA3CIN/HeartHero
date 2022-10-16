@@ -1,5 +1,5 @@
 # HeartHero
-This is an App that I have co-created with @sofiia2002 in 9 hours during the E-health hackathon in Warsaw!
+This is an App that I have co-created with [Sofiia](https://github.com/sofiia2002)) in 9 hours during the E-health hackathon in Warsaw!
 
 ## How to run it
 Install Expo, depdendencies and then run:
